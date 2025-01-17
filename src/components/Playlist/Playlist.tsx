@@ -4,34 +4,37 @@ import SongTitle from '../SongTitle/SongTitle';
 import styles from './Playlist.module.css'
 import { getSongList } from '../../services/api';
 import { ISong } from '../../domain/song';
+import { usePlayerContext } from '../../applicationn/context/PlayerProvider';
 
 const Playlist = () => {
 
   const [songList, setSongList] = useState<ISong[]>([])
-  const [selectedSong, setSelectedSong] = useState<string>('')
+  const {selectedSong, setSelectedSong} = usePlayerContext();
 
   useEffect(() => {
     getSongList()
       .then(res => setSongList(res))
   },[])
 
-  const handleOnClick = (id : string ) => {
-    setSelectedSong(id);
+  const handleOnClick = (song : ISong ) => {
+    setSelectedSong(song);
   }
 
-  const isSongSelected = (id:string) => selectedSong === id
+  const isSongSelected = (id:string) => selectedSong.id === id
 
   return (
     <section
       className={styles.playlistContainer}
       data-testid={'playlist-container'}
     >
-      {songList.map(({title, author, id}:ISong) => (
-        <Song  key={id} onClick={() => handleOnClick(id)}>
+      {songList.map((song:ISong) => {
+        const {author, title, id} = song;
+        return(
+          <Song  key={id} onClick={() => handleOnClick(song)}>
           <SongTitle data-testid={id} active={isSongSelected(id)}>{title}</SongTitle>
           <p>{author}</p>
         </Song>
-      ))}
+      )})}
     </section>
   );
 }
