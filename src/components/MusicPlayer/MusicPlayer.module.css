@@ -1,0 +1,11 @@
+.musicPlayerContainer {
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #000000;
+  height: 50vh;
+  width: 60vw;
+  align-self: center;
+  border: solid 5px #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

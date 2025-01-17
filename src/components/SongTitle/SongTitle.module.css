@@ -1,0 +1,11 @@
+.title{
+  font-weight: bold;
+}
+
+.colorSelected{
+  color: rgb(80, 255, 80);
+}
+
+.colorUnselected{
+  color: white
+}
