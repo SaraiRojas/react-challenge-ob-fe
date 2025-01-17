@@ -6,7 +6,15 @@ Technical test
 
 Implement the logic of a music player.
 
-### Introduction
+## Getting started
+
+To get local running run on terminal
+
+```bash
+yarn run dev
+```
+
+## Introduction
 
 You are given an empty context function and three components called `ControlBar`, `PlayList` and `PlayedSongTitle`. Your task is to implement the logic of the components that would make up a music player.
 
