@@ -26,7 +26,7 @@ const INITIAL_STATE_PLAYED_SONG = {
   songIndex: 0
 }
 
-export const PlayerContext = createContext({} as IPlayerContext); 
+export const PlayerContext = createContext<IPlayerContext | undefined>(undefined); 
 
 export const PlayerProvider = ({
   children,
@@ -58,7 +58,8 @@ export const PlayerProvider = ({
 
 export const usePlayerContext = () => {
   const context = useContext(PlayerContext)
-  if (context === undefined) {
+
+  if (!context) {
     throw new Error("usePlayerContext must be used within a PlayerProvider");
   }
   return context;
