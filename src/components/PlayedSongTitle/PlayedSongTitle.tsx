@@ -4,7 +4,7 @@ import styles from './PlayedSongTitle.module.css'
 const PlayedSongTitle = () => {
   const {selectedSong} = usePlayerContext();
 
-  const {title, author} = selectedSong;
+  const {song:{title, author}} = selectedSong;
 
   return (
     <section className={styles.playedSongTitleContainer}>
