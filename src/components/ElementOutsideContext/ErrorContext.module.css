@@ -1,0 +1,7 @@
+.ErrorContextContainer {
+  font-size: 1.5em;
+  color: white;
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}

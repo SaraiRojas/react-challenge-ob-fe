@@ -1,6 +1,7 @@
 import './App.module.css'
 import { PlayerProvider } from './applicationn/context/PlayerProvider'
 import { ErrorBoundary } from './applicationn/errorHandling/ErrorBoundary'
+import ErrorContext from './components/ElementOutsideContext/ErrorContext'
 import { TitleMusicPlayer } from './components/ElementOutsideContext/TitleMusicPlayer'
 import MusicPlayer from './components/MusicPlayer/MusicPlayer'
 
@@ -8,16 +9,14 @@ import MusicPlayer from './components/MusicPlayer/MusicPlayer'
 function App() {
 
   return (
-    <>
-      <ErrorBoundary fallBackComponent={<>{'Someting went wrong.'}</>}>
-      <TitleMusicPlayer/>
-      </ErrorBoundary>
-      <PlayerProvider>
-        <main>
-          <MusicPlayer/>
-        </main>
-      </PlayerProvider>
-    </>
+      <main>
+        <ErrorBoundary fallBackComponent={<ErrorContext/>}>
+        <TitleMusicPlayer/>
+        </ErrorBoundary>
+        <PlayerProvider>
+            <MusicPlayer/>
+        </PlayerProvider>
+      </main>
   )
 }
 
