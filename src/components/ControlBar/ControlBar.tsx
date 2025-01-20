@@ -1,47 +1,37 @@
 import styles from './ControlBar.module.css';
-import {buttonModes, Modes} from '../../services/buttonModes'
+import { Modes } from '../../domain/song'
 import { usePlayerContext } from '../../applicationn/context/PlayerProvider';
+import { getNextMode, getNextSong, getPreviousSong } from '../../services/playerService';
 
 const ControlBar = () => {
 
   const {songList, selectedSong, setSelectedSong, mode, setMode} = usePlayerContext()
 
   const handleModesButton = () => {
-    
-    const indexMode = buttonModes.indexOf(mode)
-    const nextIndex = indexMode > 1 ? 0 : indexMode + 1;
+
+    const nextMode: Modes = getNextMode(mode)
    
-    setMode(buttonModes[nextIndex])
+    setMode(nextMode)
   }
 
   const handleNextButton = () => {
+    if(!selectedSong.song.title) return;
+    const currentIndex: number = selectedSong.songIndex;
+    const nextSong = getNextSong({currentIndex, songList, mode});
 
-    const isFunctionBlock = mode === Modes.REPLAYING_ALL && selectedSong.songIndex === 3;
-
-    if(!selectedSong.song.title ||  mode === Modes.REPLAYING_ONE || isFunctionBlock ) return
-
-    // Using % buttonModes.length ensures that the index resets to 0 when it surpasses the maximum index (length - 1).
-    const nextSongIndex = (selectedSong.songIndex + 1) % songList.length;
-
-    setSelectedSong({
-      song: songList[nextSongIndex],
-      songIndex: nextSongIndex
-    })
+    if(nextSong){
+      setSelectedSong(nextSong)
+    }
   }
 
   const handlePreviousButton = () => {
+    if(!selectedSong.song.title) return;
+    const currentIndex: number = selectedSong.songIndex;
+    const previousSong = getPreviousSong({currentIndex, songList, mode});
 
-    const isFunctionBlock = (mode === Modes.NOT_REPLAYING) && selectedSong.songIndex === 0;
-
-    if(!selectedSong.song.title || mode === Modes.REPLAYING_ONE || isFunctionBlock ) return
-
-    // Adjusting the index with -1 + arrayLength, we apply % arrayLength to ensure the result wraps around properly for any size array.
-    const prevSongIndex = (selectedSong.songIndex - 1 + songList.length) % songList.length;
-
-    setSelectedSong({
-      song: songList[prevSongIndex],
-      songIndex: prevSongIndex
-    })
+    if(previousSong){
+      setSelectedSong(previousSong)
+    }
   }
 
   return(
