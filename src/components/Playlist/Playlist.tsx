@@ -3,10 +3,18 @@ import SongTitle from '../SongTitle/SongTitle';
 import styles from './Playlist.module.css'
 import { ISong } from '../../domain/song';
 import { usePlayerContext } from '../../applicationn/context/PlayerProvider';
+import { useEffect } from 'react';
+import { getSongList } from '../../services/api';
 
 const Playlist = () => {
 
-  const {songList, selectedSong, setSelectedSong} = usePlayerContext();
+  const {songList, setSongList, selectedSong, setSelectedSong} = usePlayerContext();
+
+  useEffect(() => {
+    getSongList()
+      .then(res => setSongList(res))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
   const handleOnClick = (song : ISong, songIndex : number) => {
     setSelectedSong({song, songIndex});

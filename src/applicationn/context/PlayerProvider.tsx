@@ -1,8 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+import { createContext, Dispatch, SetStateAction, useContext, useState } from "react";
 import { ISong } from "../../domain/song";
 import { buttonModes } from "../../services/buttonModes";
-import { getSongList } from "../../services/api";
 
 interface IselectedSong {
   song: ISong
@@ -11,6 +10,7 @@ interface IselectedSong {
 
 interface IPlayerContext {
   songList: ISong[]
+  setSongList: Dispatch<SetStateAction<ISong[]>>
   selectedSong : IselectedSong
   setSelectedSong: Dispatch<SetStateAction<IselectedSong>>
   mode: string
@@ -38,13 +38,9 @@ export const PlayerProvider = ({
   const [selectedSong, setSelectedSong] = useState<IselectedSong>(INITIAL_STATE_PLAYED_SONG)
   const [mode, setMode] = useState<string>(buttonModes[0])
 
-  useEffect(() => {
-      getSongList()
-        .then(res => setSongList(res))
-    },[])
-
   return (
     <PlayerContext.Provider value={{
+      setSongList,
       songList,
       selectedSong,
       setSelectedSong,
