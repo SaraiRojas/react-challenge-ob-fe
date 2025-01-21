@@ -20,7 +20,7 @@ export const getNextSong = ({currentIndex, songList, mode} : {currentIndex:numbe
 };
 
 export const getPreviousSong = ({currentIndex, songList, mode} : {currentIndex:number, songList: ISong[], mode: Modes}) => {
-  const isFunctionBlock = (mode === ModesValues.NOT_REPLAYING || mode === ModesValues.REPLAYING_ALL) && currentIndex === 0;
+  const isFunctionBlock = mode === ModesValues.NOT_REPLAYING && currentIndex === 0;
 
   if (mode === ModesValues.REPLAYING_ONE || isFunctionBlock) {
     return;
