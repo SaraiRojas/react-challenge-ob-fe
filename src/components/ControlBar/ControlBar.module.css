@@ -1,13 +1,13 @@
-.controlBarContainer{
-  padding: 10px;
-  display: flex;
-  justify-content: center;
+.controlBarContainer {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
 }
 
-button{
-  background-color: white;
-  border-radius: 10%;
-  margin: 1em;
-  height: 2em;
-  width: 9em;
+button {
+    background-color: white;
+    border-radius: 10%;
+    margin: 1em;
+    height: 2em;
+    width: 9em;
 }

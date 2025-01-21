@@ -1,11 +1,11 @@
-.title{
-  font-weight: bold;
+.title {
+    font-weight: bold;
 }
 
-.colorSelected{
-  color: rgb(80, 255, 80);
+.colorSelected {
+    color: rgb(80, 255, 80);
 }
 
-.colorUnselected{
-  color: white
+.colorUnselected {
+    color: white;
 }
